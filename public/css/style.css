@@ -1,0 +1,7 @@
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ body { font: 25px Helvetica, Arial; }
+ #tableOnline { width:350px;}
+ #tableAll { float:left; width:350px;}
+ pre{
+ 	width:200px;
+ }

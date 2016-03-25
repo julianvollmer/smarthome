@@ -1,0 +1,20 @@
+{
+  "name": "homeautomation",
+  "version": "1.0.0",
+  "description": "openmiligiht",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "request": "^2.69.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "smart",
+    "home"
+  ],
+  "author": "Julian Vollmer",
+  "license": "ISC"
+}

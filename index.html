@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+  <p>hello world</p>
+    <table id="tableOnline"></table>
+    <pre id="wheaterPre"></pre>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+
+      var socket = io();
+
+      socket.on('onlineMac', function(msg){
+        var data = "";
+        msg.forEach(function(entry) {
+          data += '<td>' + entry + '</td>';
+        });
+        $('#tableOnline').append('<tr>' + data + '</tr>');
+      });
+
+      socket.on('wheaterResponse', function(msg){
+        $('#wheaterPre').html(JSON.stringify(msg, null, 2));
+      });
+
+
+    </script>
+
+  </body>
+</html>
