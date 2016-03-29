@@ -20,7 +20,7 @@ tar xzvf openmilight_raspberry_pi.tgz
 cd openmilight/
 cp ~/workspace/smarthome/etc/openmili.cpp ~/workspace/openmilight/
 g++ -Ofast -mfpu=vfp -mfloat-abi=hard -march=armv7-a -mtune=arm1176jzf-s -I/usr/local/include -L/usr/local/lib -lrf24-bcm PL1167_nRF24.cpp MiLightRadio.cpp openmili.cpp -o openmilight
-sudo cp openmilight /usr/local/bin/
+sudo cp ~/workspace/openmilight/openmilight /usr/local/bin/
 rm ~/workspace/HAP-NodeJS/accessories/Light_accessory.js
 rm ~/workspace/HAP-NodeJS/accessories/Lock_accessory.js
 rm ~/workspace/HAP-NodeJS/accessories/Thermostat_accessory.js
@@ -34,3 +34,5 @@ sudo npm install npm -g
 cd ~/workspace/HAP-NodeJS/
 sudo npm install
 sudo node ~/workspace/HAP-NodeJS/Core.js
+cd ~/workspace/smarthome/
+npm install
