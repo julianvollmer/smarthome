@@ -2,33 +2,8 @@
 color=$1
 
 
-red(){
-   color=19;
-}
-
-blue(){
-   color=BA;
-}
-
-
-green(){
-   color=73;
-}
-
-
-
 case "$color" in
-   "red") red;
-   ;;
-   "blue") blue;
-   ;;
-   "green") green;
-   ;;
-   "orange") color=33;
-   ;;
-   "blue") color=AA;
-   ;;
-   "white") ./white.sh;
+    "white") ./white.sh;
    ;;
    "disco") ./disco.sh;
    ;;
@@ -36,16 +11,10 @@ case "$color" in
    ;;
    "bright") ./bright.sh;
    ;;
-   "nicegreen") ./nice_green.sh;
+   "init") ./init.sh;
    ;;
    "on") ./on.sh;
    ;;
    "off") ./off.sh;
    ;;
 esac
-
-openmilight "B8 F2 EA $color 00 0F 70"
-openmilight "B8 F2 EA $color 00 0F 71"
-openmilight "B8 F2 EA $color 00 0F 72"
-openmilight "B8 F2 EA $color 00 0F 73"
-openmilight "B8 F2 EA $color 00 0F 74"

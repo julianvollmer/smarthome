@@ -10,7 +10,7 @@ var exec = require('child_process').exec;
 var itemsInQue = 1;
 var delay = 3000;
 var call = 0;
-
+var pathToService = "/home/pi/workspace/smarthome";
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -18,9 +18,9 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/singal/:cmd', function(request, response, next) {
+app.get('/signal/:cmd', function(request, response, next) {
 	var cmd = request.params.cmd;
-	execCmd("sudo /home/pi/workspace/homeautomation/signal.sh cmd");
+	execCmd("sudo " + pathToService + "/" + cmd + ".sh");
 	response.send(200, cmd);
 });
 
@@ -30,15 +30,13 @@ app.get('/color/:color', function(request, response, next) {
 	color = color * 0.707;
 	color = Math.round(Number(color)); 
 	color = color.toString(16);
-	console.log("myColor: " + color);
-	execCmd("sudo /home/pi/workspace/homeautomation/color.sh " + color);
+	execCmd("sudo " + pathToService + "/color.sh " + color);
 	response.send(200, "notification color: " + color);
 });
 
 app.get('/brightness/:brightness', function(request, response, next) {
 	var brightness = (Math.round(Number((request.params.brightness - 100)/ 6.25))* (-1)* 8).toString(16);
-	console.log("mybrightness: " + brightness);
-	execCmd("sudo /home/pi/workspace/homeautomation/brightness.sh " + brightness);
+	execCmd("sudo " + pathToService + "/brightness.sh " + brightness);
 	response.send(200, "notification brightness: " + brightness);
 });
 
@@ -54,6 +52,7 @@ function execCmd (cmd) {
 	setTimeout(function () {
 		call++;
 		exec(cmd);
+		console.log(cmd);
 		itemsInQue--;
 	}, delay * itemsInQue);
 }

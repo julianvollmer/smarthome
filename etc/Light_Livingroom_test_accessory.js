@@ -10,20 +10,17 @@ var FAKE_LIGHT = {
   brightness: 100, // percentage
 	  
   setPowerOn: function(on) { 
-  	var status = "off";
-  	var url = 'http://192.168.178.22:3000/buero'
-    console.log("Turning the light %s!", on ? "on" : "off");
-    if(on){
-    	status  = "on";
-    }
+  	var url = 'http://192.168.178.22:3000/signal/'
+    var signal = on ? "on" : "off";
+    console.log("Turning the light %s!", signal);
     FAKE_LIGHT.powerOn = on;
-    url += status;
-	requ(url, function (error, response, body) {
-	    if (!error && response.statusCode == 200) {
-	        console.log(body); // Show the HTML for the Modulus homepage.
-	    }
-	});
-	console.log(url);
+    url += signal;
+    console.log(url);
+    requ(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log(body); // Show the HTML for the Modulus homepage.
+      }
+    });
   },
   setBrightness: function(brightness) {
     console.log("Setting light brightness to %s", brightness);
