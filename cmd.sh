@@ -1,11 +1,23 @@
-press=$1
-button=$2
-openmilight "B8 F2 EA 00 91 $press$button 11"
-openmilight "B8 F2 EA 00 91 $press$button 20"
-openmilight "B8 F2 EA 00 91 $press$button 2F"
-openmilight "B8 F2 EA 00 91 $press$button 35"
-openmilight "B8 F2 EA 00 91 $press$button 42"
-openmilight "B8 F2 EA 00 91 $press$button 55"
-openmilight "B8 F2 EA 00 91 $press$button 60"
-openmilight "B8 F2 EA 00 91 $press$button 68"
+#!/bin/bash
+button=$1
 
+for i in `seq 1 10`;
+do
+	value=$(<counter.txt)
+	((value+=3))
+	printf -v hex_result "%x" "$value"
+	echo  $hex_result $value
+
+	if [[ "$value" -gt "255"  ]]; then
+		((value-=256));
+	fi
+
+	if [[ "$value" -lt "16"  ]]; then
+		hex_result=0$hex_result;
+	fi
+
+
+	echo $hex_result
+	openmilight "B8 F2 EA 00 91 0$button $value"
+	echo "$value" > counter.txt
+done  
