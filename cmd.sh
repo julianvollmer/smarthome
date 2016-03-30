@@ -6,8 +6,7 @@ do
 	value=$(<counter.txt)
 	((value+=3))
 	printf -v hex_result "%x" "$value"
-	echo  $hex_result $value
-
+	
 	if [[ "$value" -gt "255"  ]]; then
 		((value-=256));
 	fi
@@ -16,8 +15,7 @@ do
 		hex_result=0$hex_result;
 	fi
 
-
 	echo $hex_result
-	openmilight "B8 F2 EA 00 91 0$button $value"
+	openmilight "B8 F2 EA 00 91 0$button $hex_result"
 	echo "$value" > counter.txt
-done  
+done
