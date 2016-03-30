@@ -3,7 +3,7 @@
 sudo raspi-config
 
 ## System aktualisieren und Packete nachinstallieren
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt-get install npm libavahi-compat-libdnssd-dev -y
 
@@ -21,7 +21,7 @@ tar xzvf openmilight_raspberry_pi.tgz
 tar xzvf librf24-bcm.tgz
 
 ## Bibliotheken installieren
-cd Raspberry/librf24-bcm
+cd ~/workspace/Raspberry/librf24-bcm
 sed -i 's|BCM2835_PERI_BASE=0x.*|BCM2835_PERI_BASE=0x3F000000|g' Makefile
 make
 sudo make install
