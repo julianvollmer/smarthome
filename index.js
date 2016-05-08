@@ -18,14 +18,15 @@ app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/signal/:cmd', function(request, response, next) {
+app.get('/signal/:bulbId/:cmd', function(request, response, next) {
 	var cmd = request.params.cmd;
-	execCmd("sudo " + pathToService + "/" + cmd + ".sh");
+	var bulbId = request.params.bulbId;
+	execCmd("sudo " + pathToService + "/cmd.sh " + bulbId + " " + cmd );
 	response.send(200, cmd);
 });
 
 
-app.get('/color/:color', function(request, response, next) {
+app.get('/color/:bulbId/:color', function(request, response, next) {
 	var color = request.params.color;
 	color = color * 0.707;
 	color = Math.round(Number(color)); 
@@ -34,7 +35,7 @@ app.get('/color/:color', function(request, response, next) {
 	response.send(200, "notification color: " + color);
 });
 
-app.get('/brightness/:brightness', function(request, response, next) {
+app.get('/brightness/:bulbId/:brightness', function(request, response, next) {
 	var brightness = (Math.round(Number((request.params.brightness - 100)/ 6.25))* (-1)* 8).toString(16);
 	execCmd("sudo " + pathToService + "/brightness.sh " + brightness);
 	response.send(200, "notification brightness: " + brightness);
