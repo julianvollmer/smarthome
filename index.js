@@ -32,7 +32,7 @@ app.get('/color/:bulbId/:color', function(request, response, next) {
 	color = color * 0.707;
 	color = Math.round(Number(color)); 
 	color = color.toString(16);
-	execCmd("sudo " + pathToService + "/color.sh " + bulbId + " " + color;
+	execCmd("sudo " + pathToService + "/color.sh " + bulbId + " " + color);
 	response.send(200, "notification color: " + color);
 });
 
@@ -45,6 +45,20 @@ app.get('/brightness/:bulbId/:brightness', function(request, response, next) {
 
 app.get('/outlet/:deviceId/:state', function(request, response, next) {
 	var cmd = "sudo send433 11111 " + request.params.deviceId + " " + request.params.state;
+	execCmd(cmd);
+    response.send(cmd);
+});
+
+app.get('/disco/:on', function(request, response, next) {
+	var on = request.params.on;
+	var cmd = "sudo " + pathToService + (on==="1" ? "/disco.sh" : "/reset.sh");
+	console.log(cmd + on);
+	execCmd(cmd);
+    response.send(cmd);
+});
+
+app.get('/reset/', function(request, response, next) {
+	var cmd = "sudo " + pathToService + "/reset.sh";
 	execCmd(cmd);
     response.send(cmd);
 });
