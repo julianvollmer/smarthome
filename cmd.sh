@@ -1,5 +1,7 @@
 #!/bin/bash
-button=$1
+bulbId=$1
+button=$2
+
 
 for i in `seq 1 10`;
 do
@@ -16,6 +18,6 @@ do
 	fi
 
 	echo $hex_result
-	openmilight "B8 F2 EA 00 91 0$button $hex_result"
+	openmilight "B8 $bulbId EA 00 91 0$button $hex_result"
 	echo "$value" > counter.txt
 done
